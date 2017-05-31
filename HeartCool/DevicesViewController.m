@@ -199,6 +199,20 @@
     
     MainViewController *next = [[MainViewController alloc] init];
     next.currPeripheral = [[peripheralDataArray objectAtIndex:indexPath.row] objectForKey:@"peripheral"];
+    
+    for (CBService *service in [next.currPeripheral services]) {
+        if (![[[service UUID] UUIDString] isEqualToString:@"0783b03e-8535-b5a0-7140-a304d2495cb7"]) {
+            continue;
+        }
+        for (CBCharacteristic *charac in [service characteristics]) {
+            if ([[[charac UUID] UUIDString] isEqualToString:@"0783b03e-8535-b5a0-7140-a304d2495cba"]) {
+                next.characteristicTX = charac;
+            } else if ([[[charac UUID] UUIDString] isEqualToString:@"0783b03e-8535-b5a0-7140-a304d2495cb8"]) {
+                next.characteristicRX = charac;
+            }
+        }
+    }
+    
     next->baby = self->baby;
     [self.navigationController pushViewController:next animated:YES];
 }

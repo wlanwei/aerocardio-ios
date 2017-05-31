@@ -17,5 +17,7 @@
 }
 
 @property(strong, nonatomic)CBPeripheral *currPeripheral;
+@property (nonatomic,strong)CBCharacteristic *characteristicTX;
+@property (nonatomic,strong)CBCharacteristic *characteristicRX;
 
 @end
