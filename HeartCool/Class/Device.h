@@ -10,6 +10,15 @@
 
 #import "WDSingleton.h"
 
+static const int MODEL_20_1 = 1;
+static const int MODEL_20_3 = 2;
+static const int MODEL_20_3_HI = 3;
+static const int MODEL_20_2_HI = 4;
+static const int STATE_ON = 1;
+static const int STATE_OFF = 2;
+static const int STATE_CONNECTED = 3;
+static const int STATE_CONNECTING = 4;
+
 @interface Device : NSObject {
     @public
     NSString *deviceId;
