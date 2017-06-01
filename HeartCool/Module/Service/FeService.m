@@ -10,4 +10,11 @@
 
 @implementation FeService
 
+WDSingletonM(FeService)
+
++ (FeService*)shared {
+    FeService *q = [self sharedFeService];
+    return q;
+}
+
 @end

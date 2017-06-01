@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "WDSingleton.h"
+
 @interface FeService : NSObject
+
+WDSingletonH(FeService)
+
++ (FeService*)shared;
 
 @end

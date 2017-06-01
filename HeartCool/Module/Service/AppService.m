@@ -10,4 +10,11 @@
 
 @implementation AppService
 
+WDSingletonM(AppService)
+
++ (AppService*)shared {
+    AppService *q = [self sharedAppService];
+    return q;
+}
+
 @end

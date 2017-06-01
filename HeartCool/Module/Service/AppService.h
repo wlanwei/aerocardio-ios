@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+#import "WDSingleton.h"
+
 @interface AppService : NSObject
+
+WDSingletonH(AppService)
+
++ (AppService*)shared;
 
 @end

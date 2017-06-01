@@ -21,6 +21,9 @@ WDSingletonH(FeTxQueue)
 
 + (FeTxQueue*)shared;
 
+- (void)start;
+- (void)stop;
+
 - (void)put:(FeMessage*)msg;
 - (FeMessage*)take;
 
