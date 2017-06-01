@@ -16,4 +16,7 @@ WDSingletonH(FeService)
 
 + (FeService*)shared;
 
+- (void)start;
+- (void)stop;
+
 @end

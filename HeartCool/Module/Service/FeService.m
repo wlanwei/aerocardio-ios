@@ -8,6 +8,8 @@
 
 #import "FeService.h"
 
+#import "FeTxQueue.h"
+
 @implementation FeService
 
 WDSingletonM(FeService)
@@ -15,6 +17,14 @@ WDSingletonM(FeService)
 + (FeService*)shared {
     FeService *q = [self sharedFeService];
     return q;
+}
+
+- (void)start {
+    [[FeTxQueue shared] start];
+}
+
+- (void)stop {
+    [[FeTxQueue shared] stop];
 }
 
 @end

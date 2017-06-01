@@ -10,10 +10,10 @@
 
 @interface PointContainer : NSObject
 
-@property (nonatomic , readonly) NSInteger numberOfRefreshElements;
-@property (nonatomic , readonly) NSInteger numberOfTranslationElements;
-@property (nonatomic , readonly) CGPoint *refreshPointContainer;
-@property (nonatomic , readonly) CGPoint *translationPointContainer;
+@property (nonatomic, readonly) NSInteger numberOfRefreshElements;
+@property (nonatomic, readonly) NSInteger numberOfTranslationElements;
+@property (nonatomic, readonly) CGPoint *refreshPointContainer;
+@property (nonatomic, readonly) CGPoint *translationPointContainer;
 
 + (void)setMaxContainerCapacity:(NSInteger) cap;
 

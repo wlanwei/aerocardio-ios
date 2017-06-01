@@ -46,34 +46,40 @@
 +(int)bytesToShort:(NSData*)data Offset:(int)offset {
     int val = 0;
     int mask = 0xff;
+    int num;
     char bytes[sizeof(short)];
     [data getBytes:bytes length:sizeof(short)];
-    for (int m = offset; m < offset+sizeof(short)-1; m ++) {
-        int num = bytes[m];
-        num <<= (8*(m-offset));
-        num &= mask;
-        num <<= 8;
-        num >>= 8;
-        mask <<= 8;
-        val += num;
-    }
+    
+    num = bytes[offset];
+    num &= mask;
+    mask <<= 8;
+    val += num;
+    
+    num = bytes[offset+1];
+    num <<= 24;
+    num >>= 16;
+    val += num;
+    
     return val;
 }
 
 +(int)bytesToUnsignedShort:(NSData*)data Offset:(int)offset {
     int val = 0;
     int mask = 0xff;
-    unsigned char bytes[sizeof(short)];
+    int num;
+    unichar bytes[sizeof(short)];
     [data getBytes:bytes length:sizeof(short)];
-    for (int m = offset; m < offset+sizeof(short)-1; m ++) {
-        int num = bytes[m];
-        num <<= (8*(m-offset));
-        num &= mask;
-        num <<= 8;
-        num >>= 8;
-        mask <<= 8;
-        val += num;
-    }
+    
+    num = bytes[offset];
+    num &= mask;
+    mask <<= 8;
+    val += num;
+    
+    num = bytes[offset+1];
+    num <<= 8;
+    num &= mask;
+    val += num;
+    
     return val;
 }
 
@@ -82,12 +88,10 @@
     int mask = 0xff;
     char bytes[sizeof(int)];
     [data getBytes:bytes length:sizeof(int)];
-    for (int m = offset; m < offset+sizeof(int)-1; m ++) {
+    for (int m = offset; m < offset+sizeof(int); m ++) {
         int num = bytes[m];
         num <<= (8*(m-offset));
         num &= mask;
-        num <<= 8;
-        num >>= 8;
         mask <<= 8;
         val += num;
     }
@@ -99,12 +103,10 @@
     long mask = 0xff;
     char bytes[sizeof(long)];
     [data getBytes:bytes length:sizeof(long)];
-    for (int m = offset; m < offset+sizeof(long)-1; m ++) {
-        int num = bytes[m];
+    for (int m = offset; m < offset+sizeof(long); m ++) {
+        long num = bytes[m];
         num <<= (8*(m-offset));
         num &= mask;
-        num <<= 8;
-        num >>= 8;
         mask <<= 8;
         val += num;
     }
