@@ -24,6 +24,7 @@ static const int STATE_CONNECTING = 4;
     NSString *deviceId;
     NSString *mac;
     NSString *name;
+    int model;
     int sps;
     int streamLen;
     NSString *key;
@@ -36,5 +37,7 @@ WDSingletonH(Device)
 
 - (NSString*)toString;
 - (void)save;
+
+- (int)getModel;
 
 @end

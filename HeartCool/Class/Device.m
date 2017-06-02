@@ -44,4 +44,8 @@ WDSingletonM(Device)
     [KeychainStore save:@"Device" value:[self toString]];
 }
 
+- (int)getModel {
+    return self->model;
+}
+
 @end
