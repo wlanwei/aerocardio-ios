@@ -48,4 +48,12 @@ WDSingletonM(Device)
     return self->model;
 }
 
+- (int)getSps {
+    return self->sps;
+}
+
+- (int)getStreamLen {
+    return self->streamLen;
+}
+
 @end

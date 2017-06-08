@@ -95,6 +95,8 @@
 		5AC046241E7977AB0090A670 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0461C1E7977AB0090A670 /* AFURLRequestSerialization.m */; };
 		5AC046251E7977AB0090A670 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC0461E1E7977AB0090A670 /* AFURLResponseSerialization.m */; };
 		5AC046261E7977AB0090A670 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC046201E7977AB0090A670 /* AFURLSessionManager.m */; };
+		5AD208B91EE9944F0070F4D7 /* EcgConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AD208B71EE9944F0070F4D7 /* EcgConst.h */; };
+		5AD208BA1EE9944F0070F4D7 /* EcgConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD208B81EE9944F0070F4D7 /* EcgConst.m */; };
 		5ADA32CD1E68576000CADC03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA32CC1E68576000CADC03 /* main.m */; };
 		5ADA32D01E68576000CADC03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA32CF1E68576000CADC03 /* AppDelegate.m */; };
 		5ADA32D61E68576000CADC03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ADA32D41E68576000CADC03 /* Main.storyboard */; };
@@ -266,6 +268,8 @@
 		5AC0461E1E7977AB0090A670 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		5AC0461F1E7977AB0090A670 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
 		5AC046201E7977AB0090A670 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
+		5AD208B71EE9944F0070F4D7 /* EcgConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EcgConst.h; sourceTree = "<group>"; };
+		5AD208B81EE9944F0070F4D7 /* EcgConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EcgConst.m; sourceTree = "<group>"; };
 		5ADA32C81E68575F00CADC03 /* HeartCool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartCool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ADA32CC1E68576000CADC03 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5ADA32CE1E68576000CADC03 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -424,6 +428,8 @@
 		5A0C09871E949BD100E8693F /* Class */ = {
 			isa = PBXGroup;
 			children = (
+				5AD208B71EE9944F0070F4D7 /* EcgConst.h */,
+				5AD208B81EE9944F0070F4D7 /* EcgConst.m */,
 				5A0C09881E949D4700E8693F /* Device.h */,
 				5A0C09891E949D4700E8693F /* Device.m */,
 				5A0C098A1E949D4700E8693F /* User.h */,
@@ -697,6 +703,7 @@
 				5ABBDD3C1ECDF9F1003D9DA2 /* BEAT.h in Headers */,
 				5ABBDD541ECDF9F1003D9DA2 /* QRSDET.h in Headers */,
 				5ABBDD511ECDF9F1003D9DA2 /* PafDetect.h in Headers */,
+				5AD208B91EE9944F0070F4D7 /* EcgConst.h in Headers */,
 				5ABBDD381ECDF9F1003D9DA2 /* BaseFilter.h in Headers */,
 				5ABBDD4A1ECDF9F1003D9DA2 /* HRCheck.h in Headers */,
 				5ABBDD361ECDF9F1003D9DA2 /* ANALBEAT.h in Headers */,
@@ -865,6 +872,7 @@
 				5ABBDD3D1ECDF9F1003D9DA2 /* CLASSIFY.cpp in Sources */,
 				5A7548171E78569100201770 /* BabyCallback.m in Sources */,
 				5ABBDD501ECDF9F1003D9DA2 /* PafDetect.cpp in Sources */,
+				5AD208BA1EE9944F0070F4D7 /* EcgConst.m in Sources */,
 				5AFD82E01E85364F00C36F30 /* SVProgressAnimatedView.m in Sources */,
 				5A0C098C1E949D4700E8693F /* Device.m in Sources */,
 				5ABBDD521ECDF9F1003D9DA2 /* POSTCLAS.cpp in Sources */,

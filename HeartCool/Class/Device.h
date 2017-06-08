@@ -39,5 +39,7 @@ WDSingletonH(Device)
 - (void)save;
 
 - (int)getModel;
+- (int)getSps;
+- (int)getStreamLen;
 
 @end

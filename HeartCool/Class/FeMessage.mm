@@ -11,6 +11,7 @@
 #import "Device.h"
 #import "MessageUtils.h"
 #include "Ecg.h"
+#import "EcgConst.h"
 
 @implementation FeMessage
 
@@ -94,33 +95,34 @@
         
         int ecgType;
         if (type == TYPE_STREAM_ECG_1) {
-            ecgType = Ecg.TYPE_SINGLE;
+            ecgType = TYPE_SINGLE;
         } else if (type == TYPE_STREAM_ECG_3) {
-            ecgType = Ecg.TYPE_THREE;
+            ecgType = TYPE_THREE;
         } else if (type == TYPE_STREAM_ECG_12) {
-            ecgType = Ecg.TYPE_FULL;
+            ecgType = TYPE_FULL;
         } else if (type == TYPE_STREAM_ECG_2) {
-            ecgType = Ecg.TYPE_THREE;
+            ecgType = TYPE_THREE;
         } else {
-            ecgType = Ecg.TYPE_SINGLE;
+            ecgType = TYPE_SINGLE;
         }
-        Ecg *ecg = new Ecg(ecgType, -1, -1, -1, [array bytes]);
+        Ecg *ecg = new Ecg(ecgType, -1, -1, -1, (int*)[array bytes]);
         
         Device *dev = [Device shared];
-        int sps = dev.getSps();
-        int streamLen = dev.getStreamLen();
+        int sps = [dev getSps];
+        int streamLen = [dev getStreamLen];
         long timediff = streamLen * 1000 / sps;
         
-        user.setTimeStreamPrev(timeInit);
-        user.setStampStreamPrev(stamp);
         
-        ecg.setSps(sps);
-        ecg.setStartTime(timeInit);
-        ecg.setStopTime(timeInit + timediff);
+//        user.setTimeStreamPrev(timeInit);
+//        user.setStampStreamPrev(stamp);
+
+        ecg->setSps(sps);
+        ecg->setTime_start(timeInit);
+        ecg->setTime_stop(timeInit + timediff);
         
-        return ecg;
+        return (__bridge id)ecg;
     } else {
-        return null;
+        return nil;
     }
     
     return nil;
