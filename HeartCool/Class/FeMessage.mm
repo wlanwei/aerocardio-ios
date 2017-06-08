@@ -216,7 +216,37 @@
 }
 
 - (Device*)extractDevice {
-    return nil;
+    if (type == TYPE_REGISTER) {
+        NSData *_id;
+        int model = 0;
+        int streamLen = 0;
+        int sps = 0;
+        NSData *key;
+        
+        _id = [body subdataWithRange:NSMakeRange(0, 8)];
+        model = [MessageUtils bytesToShort:body Offset:8];
+
+        char bytes[[body length]];
+        [body getBytes:bytes length:[body length]];
+        
+        
+        streamLen = bytes[10] & 0x00ff;
+        
+        sps = [MessageUtils bytesToShort: body Offset:11];
+        
+        key = [body subdataWithRange:NSMakeRange(16, 16)];
+        
+        Device *dev = [[Device alloc] init];
+        
+        dev->deviceId = [[NSString alloc] initWithData:_id encoding:NSUTF8StringEncoding];
+        dev->sps = sps;
+        dev->streamLen = streamLen;
+        dev->key = [[NSString alloc] initWithData:key encoding:NSUTF8StringEncoding];
+        
+        return dev;
+    } else {
+        return nil;
+    }
 }
 
 + (FeMessage*)createRegAckMsg:(Device*)device {
