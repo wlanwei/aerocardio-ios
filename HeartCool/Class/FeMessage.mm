@@ -12,6 +12,8 @@
 #import "MessageUtils.h"
 #include "Ecg.h"
 #import "EcgConst.h"
+#include "EcgMark.h"
+#import "EcgMarkConst.h"
 
 @implementation FeMessage
 
@@ -113,8 +115,8 @@
         long timediff = streamLen * 1000 / sps;
         
         
-//        user.setTimeStreamPrev(timeInit);
-//        user.setStampStreamPrev(stamp);
+        [user setTimeStreamPrev:timeInit];
+        [user setStampStreamPrev:stamp];
 
         ecg->setSps(sps);
         ecg->setTime_start(timeInit);
@@ -129,11 +131,88 @@
 }
 
 - (id)extractEcg:(User*)user {
+    int stamp;
+    NSData *array;
+    if (type == TYPE_STREAM_ECG_1 || type == TYPE_STREAM_ECG_3 || type == TYPE_STREAM_ECG_12 || type == TYPE_STREAM_ECG_2) {
+        stamp = [MessageUtils bytesToUnsignedShort:body Offset:0];
+        
+        if ([[Device shared] getModel] == MODEL_20_3_HI) {
+            //For 24 bit high resolution
+            int data[[self->body length] - 2 / 3];
+            for (int m = 0; m < sizeof(data); m++) {
+                data[m] = [MessageUtils bytesToDemiInt:body Offset:2 + 3 * m];
+            }
+        } else if ([[Device shared] getModel] == MODEL_20_3 || [[Device shared] getModel] == MODEL_20_1) {
+            //For 16 bit regular resolution
+            int data[[self->body length] - 2 / 2];
+            for (int m = 0; m < sizeof(data); m++) {
+                data[m] = [MessageUtils bytesToShort:body Offset:2 + 2 * m ];
+            }
+        } else if ([[Device shared] getModel] == MODEL_20_2_HI) {
+            //For 24 bit regular resolution
+            int data[[self->body length] - 2 / 2];
+            for (int m = 0; m < sizeof(data); m++) {
+                data[3 * m] = [MessageUtils bytesToDemiInt:body Offset:2 + 3 * (2 * m)];
+                data[3 * m + 1] = [MessageUtils bytesToDemiInt:body Offset:2 + 3 * (2 * m + 1)];
+                data[3 * m + 2] = data[3 * m + 1] - data[3 * m];
+            }
+        } else {
+            return nil;
+        }
+        
+        int ecgType;
+        if (type == TYPE_STREAM_ECG_1) {
+            ecgType = TYPE_SINGLE;
+        } else if (type == TYPE_STREAM_ECG_3) {
+            ecgType = TYPE_THREE;
+        } else if (type == TYPE_STREAM_ECG_12) {
+            ecgType = TYPE_FULL;
+        } else if (type == TYPE_STREAM_ECG_2) {
+            ecgType = TYPE_THREE;
+        } else {
+            ecgType = TYPE_SINGLE;
+        }
+        //            L.i("<FECODER> ecg type = " + Integer.toString(ecgType));
+        Ecg *ecg = new Ecg(ecgType, -1, -1, -1, (int*)[array bytes]);
+        
+        int stampPrev = [user getStampStreamPrev];
+        long timePrev = [user getTimeStreamPrev];
+        Device *dev = [Device shared];
+        int sps = [dev getSps];
+        int streamLen = [dev getStreamLen];
+        long timediff = streamLen * 1000 / sps;
+        
+        int stampDiff = stampPrev < stamp ? stamp - stampPrev : 65535 - stampPrev + stamp;
+        
+        long timeNow = timePrev + stampDiff * timediff;
+        [user setTimeStreamPrev:timeNow];
+        [user setStampStreamPrev:stamp];
+        
+        ecg->setSps(sps);
+        ecg->setTime_start(timeNow);
+        ecg->setTime_stop(timeNow + timediff);
+        
+        return (__bridge id)ecg;
+    } else {
+        return nil;
+    }
+    
     return nil;
 }
 
 - (id)extractMark:(long)startTime {
-    return nil;
+    if (type == TYPE_STATUS) {
+        int markType = [MessageUtils bytesToShort:body Offset:0];
+        int value = [MessageUtils bytesToInt:body Offset:2];
+        
+        EcgMark *ecgMark = new EcgMark(startTime, startTime, TYPE_GROUP_STATUS, markType, value);
+        return (__bridge id)ecgMark;
+    } else if (type == TYPE_USERINPUT) {
+        EcgMark *ecgMark = new EcgMark(startTime, startTime, TYPE_GROUP_PHYSIO, PHYSIO_USERINPUT, 0);
+        return (__bridge id)ecgMark;
+    } else {
+        return nil;
+    }
 }
 
 - (Device*)extractDevice {

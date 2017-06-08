@@ -44,4 +44,20 @@ WDSingletonM(User)
     return [self->password length] != 0;
 }
 
+- (void)setStampStreamPrev:(int)i {
+    self->stampStreamPrev = i;
+}
+
+- (int)getStampStreamPrev {
+    return self->stampStreamPrev;
+}
+
+- (void)setTimeStreamPrev:(long)i {
+    self->timeStreamPrev = i;
+}
+
+- (long)getTimeStreamPrev {
+    return self->timeStreamPrev;
+}
+
 @end

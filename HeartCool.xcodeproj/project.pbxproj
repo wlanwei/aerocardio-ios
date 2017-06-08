@@ -97,6 +97,8 @@
 		5AC046261E7977AB0090A670 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AC046201E7977AB0090A670 /* AFURLSessionManager.m */; };
 		5AD208B91EE9944F0070F4D7 /* EcgConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AD208B71EE9944F0070F4D7 /* EcgConst.h */; };
 		5AD208BA1EE9944F0070F4D7 /* EcgConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD208B81EE9944F0070F4D7 /* EcgConst.m */; };
+		5AD208BD1EE9A0070070F4D7 /* EcgMarkConst.h in Headers */ = {isa = PBXBuildFile; fileRef = 5AD208BB1EE9A0070070F4D7 /* EcgMarkConst.h */; };
+		5AD208BE1EE9A0070070F4D7 /* EcgMarkConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AD208BC1EE9A0070070F4D7 /* EcgMarkConst.m */; };
 		5ADA32CD1E68576000CADC03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA32CC1E68576000CADC03 /* main.m */; };
 		5ADA32D01E68576000CADC03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5ADA32CF1E68576000CADC03 /* AppDelegate.m */; };
 		5ADA32D61E68576000CADC03 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5ADA32D41E68576000CADC03 /* Main.storyboard */; };
@@ -270,6 +272,8 @@
 		5AC046201E7977AB0090A670 /* AFURLSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFURLSessionManager.m; sourceTree = "<group>"; };
 		5AD208B71EE9944F0070F4D7 /* EcgConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EcgConst.h; sourceTree = "<group>"; };
 		5AD208B81EE9944F0070F4D7 /* EcgConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EcgConst.m; sourceTree = "<group>"; };
+		5AD208BB1EE9A0070070F4D7 /* EcgMarkConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EcgMarkConst.h; sourceTree = "<group>"; };
+		5AD208BC1EE9A0070070F4D7 /* EcgMarkConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EcgMarkConst.m; sourceTree = "<group>"; };
 		5ADA32C81E68575F00CADC03 /* HeartCool.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartCool.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5ADA32CC1E68576000CADC03 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		5ADA32CE1E68576000CADC03 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -430,6 +434,8 @@
 			children = (
 				5AD208B71EE9944F0070F4D7 /* EcgConst.h */,
 				5AD208B81EE9944F0070F4D7 /* EcgConst.m */,
+				5AD208BB1EE9A0070070F4D7 /* EcgMarkConst.h */,
+				5AD208BC1EE9A0070070F4D7 /* EcgMarkConst.m */,
 				5A0C09881E949D4700E8693F /* Device.h */,
 				5A0C09891E949D4700E8693F /* Device.m */,
 				5A0C098A1E949D4700E8693F /* User.h */,
@@ -722,6 +728,7 @@
 				5ABBDD5B1ECDF9F1003D9DA2 /* VFdetect.h in Headers */,
 				5ABBDD461ECDF9F1003D9DA2 /* EcgMark.h in Headers */,
 				5ABBDD481ECDF9F1003D9DA2 /* FIBDetect.h in Headers */,
+				5AD208BD1EE9A0070070F4D7 /* EcgMarkConst.h in Headers */,
 				5ABBDD531ECDF9F1003D9DA2 /* POSTCLAS.h in Headers */,
 				5ABBDD571ECDF9F1003D9DA2 /* QRSFILT.h in Headers */,
 			);
@@ -906,6 +913,7 @@
 				5ABBDD471ECDF9F1003D9DA2 /* FIBDetect.cpp in Sources */,
 				5ABBDD391ECDF9F1003D9DA2 /* BDAC.cpp in Sources */,
 				5AACB2F81E803871001E5ECE /* RegisterPersonalViewController.m in Sources */,
+				5AD208BE1EE9A0070070F4D7 /* EcgMarkConst.m in Sources */,
 				5A75481D1E78569100201770 /* BabySpeaker.m in Sources */,
 				5A0C099C1E94D59200E8693F /* AppTxQueue.mm in Sources */,
 				5AC046211E7977AB0090A670 /* AFHTTPSessionManager.m in Sources */,

@@ -30,6 +30,9 @@ static int const APPSTATE_LOGIN = 6;
     NSString *password;
     int feState;
     int appState;
+    
+    int stampStreamPrev;
+    long timeStreamPrev;
 }
 
 WDSingletonH(User)
@@ -40,5 +43,10 @@ WDSingletonH(User)
 - (void)save;
 
 - (BOOL)isRemeber;
+
+- (void)setStampStreamPrev:(int)i;
+- (int)getStampStreamPrev;
+- (void)setTimeStreamPrev:(long)i;
+- (long)getTimeStreamPrev;
 
 @end
