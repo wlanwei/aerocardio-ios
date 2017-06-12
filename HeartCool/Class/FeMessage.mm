@@ -250,15 +250,44 @@
 }
 
 + (FeMessage*)createRegAckMsg:(Device*)device {
-    return nil;
+    char body[[self getBodyLength:TYPE_REGISTER_ACK length:0 resolution:0]];
+    const char *bytes1 = [device->deviceId UTF8String];
+    memcpy(&body, bytes1, 8);
+    /*test code */
+    body[0] = (char) 0x00ff;
+    body[1] = (char) 0x00ff;
+    const char *bytes2 = (char*)[[MessageUtils shortToBytes:[device getModel]] bytes];
+    for (int i=8; i < 10; i++) {
+        body[i] = bytes2[i-8];
+    }
+    body[10] = (char) ([device getStreamLen] & 0x00ff);
+    const char *bytes3 = (char*)[[MessageUtils shortToBytes:[device getSps]] bytes];
+    for (int i=10; i < 12; i++) {
+        body[i] = bytes3[i-10];
+    }
+    device->keyPair = @"0000000000000000";
+    const char *bytes4 = [device->keyPair UTF8String];
+    for (int i=12; i < 28; i++) {
+        body[i] = bytes4[i-12];
+    }
+    FeMessage *msg = [[FeMessage alloc] init];
+    msg->type = TYPE_REGISTER_ACK;
+    msg->body = [[NSData alloc] initWithBytes:body length:sizeof(body)];
+    return msg;
 }
 
 + (FeMessage*)createPulseMsg {
-    return nil;
+    FeMessage *msg = [[FeMessage alloc] init];
+    msg->type = TYPE_PULSE;
+    msg->body = nil;
+    return msg;
 }
 
 + (FeMessage*)createResetMsg {
-    return nil;
+    FeMessage *msg = [[FeMessage alloc] init];
+    msg->type = TYPE_RESET;
+    msg->body = nil;
+    return msg;
 }
 
 + (FeMessage*)createMarkMsg {
