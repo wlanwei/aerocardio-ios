@@ -49,6 +49,6 @@ static int const TYPE_NULL = 0xff;
 + (FeMessage*)createRegAckMsg:(Device*)device;
 + (FeMessage*)createPulseMsg;
 + (FeMessage*)createResetMsg;
-+ (FeMessage*)createMarkMsg;
++ (FeMessage*)createMarkMsg:(id)mark;
 
 @end

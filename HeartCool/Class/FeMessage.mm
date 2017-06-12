@@ -123,10 +123,7 @@
         ecg->setTime_stop(timeInit + timediff);
         
         return (__bridge id)ecg;
-    } else {
-        return nil;
     }
-    
     return nil;
 }
 
@@ -193,10 +190,7 @@
         ecg->setTime_stop(timeNow + timediff);
         
         return (__bridge id)ecg;
-    } else {
-        return nil;
     }
-    
     return nil;
 }
 
@@ -210,9 +204,8 @@
     } else if (type == TYPE_USERINPUT) {
         EcgMark *ecgMark = new EcgMark(startTime, startTime, TYPE_GROUP_PHYSIO, PHYSIO_USERINPUT, 0);
         return (__bridge id)ecgMark;
-    } else {
-        return nil;
     }
+    return nil;
 }
 
 - (Device*)extractDevice {
@@ -244,9 +237,8 @@
         dev->key = [[NSString alloc] initWithData:key encoding:NSUTF8StringEncoding];
         
         return dev;
-    } else {
-        return nil;
     }
+    return nil;
 }
 
 + (FeMessage*)createRegAckMsg:(Device*)device {
@@ -290,7 +282,48 @@
     return msg;
 }
 
-+ (FeMessage*)createMarkMsg {
++ (FeMessage*)createMarkMsg:(id)mark {
+    EcgMark *_mark = (__bridge EcgMark*)mark;
+    if (_mark->getTypeGroup() == TYPE_GROUP_STATUS) {
+        char body[[self getBodyLength:TYPE_STATUS length:0 resolution:0]];
+        body[0] = 0;
+        body[1] = 0;
+        
+        const char *bytes1 = (char*)[[MessageUtils shortToBytes:_mark->getType()] bytes];
+        for (int i=2; i < 2+2; i++) {
+            body[i] = bytes1[i-2];
+        }
+        const char *bytes2 = (char*)[[MessageUtils shortToBytes:_mark->getValue()] bytes];
+        for (int i=4; i < 4+2; i++) {
+            body[i] = bytes2[i-4];
+        }
+        
+        FeMessage *msg = [[FeMessage alloc] init];
+        msg->type = TYPE_STATUS;
+        msg->body = [[NSData alloc] initWithBytes:body length:sizeof(body)];
+        return msg;
+    } else if (_mark->getTypeGroup() == TYPE_GROUP_PHYSIO) {
+        char body[[self getBodyLength:TYPE_ANALYSIS_PHSIO length:0 resolution:0]];
+        if (_mark->getType() == PHYSIO_HR) {
+            const char *bytes1 = (char*)[[MessageUtils shortToBytes:1] bytes];
+            memcpy(&body, bytes1, 2);
+        } else if (_mark->getType() == PHYSIO_BR) {
+            const char *bytes1 = (char*)[[MessageUtils shortToBytes:2] bytes];
+            memcpy(&body, bytes1, 2);
+        } else {
+            const char *bytes1 = (char*)[[MessageUtils shortToBytes:_mark->getType()] bytes];
+            memcpy(&body, bytes1, 2);
+        }
+        const char *bytes2 = (char*)[[MessageUtils shortToBytes:_mark->getValue()] bytes];
+        for (int i=2; i < 2+2; i++) {
+            body[i] = bytes2[i-2];
+        }
+        
+        FeMessage *msg = [[FeMessage alloc] init];
+        msg->type = TYPE_ANALYSIS_PHSIO;
+        msg->body = [[NSData alloc] initWithBytes:body length:sizeof(body)];
+        return msg;
+    }
     return nil;
 }
 
